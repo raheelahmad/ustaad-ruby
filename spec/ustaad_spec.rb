@@ -8,6 +8,14 @@ describe Ustaad do
 		@as = ['Delhi', 1947, '100 F']
 	end
 	
+	# using mushqs
+	
+	def add_mushqs
+	  @qs.each_index	{ |idx|
+			@ustaad.add_mushq Mushq.new(question:@qs[idx], answer:@as[idx])
+		}
+	end
+	
   it "should be creatable" do
 		@ustaad.should_not == nil
   end
@@ -19,13 +27,22 @@ describe Ustaad do
 	end
 	
 	it "should give a question from an added mushq" do
-	  @qs.each_index	{ |idx|
-			q = @qs[idx]
-			a = @as[idx]
-			m = Mushq.new(question:q, answer:a)
-			@ustaad.add_mushq(m)
-		}
-		puts @ustaad.any_question
+	  add_mushqs
 		@qs.include?(@ustaad.any_question).should == true
 	end
+	
+	it "should confirm the correct answer to a question" do
+		add_mushqs
+	  q = @ustaad.any_question
+		our_a = @as[@qs.index(q)]
+		@ustaad.answer_for(q).should == our_a
+	end
+	
+	
+	# persistence
+	
+	it "should persist mushqs between new Ustaad's" do
+	  pending "Figure out persistence options (redis, couch-db)"
+	end
+	
 end

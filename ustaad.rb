@@ -17,4 +17,9 @@ class Ustaad
 		random_index = rand(@mushqs.count)
 		return @mushqs.at(random_index).question
 	end
+
+	def answer_for (question)
+		matches = @mushqs.select { |m| m.question == question }
+		matches.first.answer
+	end
 end
