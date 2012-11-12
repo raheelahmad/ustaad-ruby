@@ -1,10 +1,10 @@
-require_relative '../mushq'
+require_relative '../lib/ustaad/mushq'
 
-describe Mushq do
+describe Ustaad::Mushq do
 	before(:each) do
 		@q = 'What is the capital of India?'
 		@a = 'Delhi'
-	  @mushq = Mushq.new( question:@q, answer:@a )
+	  @mushq = Ustaad::Mushq.new( question:@q, answer:@a )
 	end
 	
   it "should be initialized with a question and an answer" do

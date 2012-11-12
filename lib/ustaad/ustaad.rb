@@ -1,5 +1,9 @@
 require "ustaad/version"
 
 module Ustaad
-  # Your code goes here...
+  class Ustaad
+  	def add_kitaab(new_kitaab)
+  		
+  	end
+  end
 end

@@ -1,9 +1,9 @@
-require_relative '../kitaab'
-require_relative '../mushq'
+require_relative '../lib/ustaad/kitaab'
+require_relative '../lib/ustaad/mushq'
 
-describe Kitaab do
+describe Ustaad::Kitaab do
   before(:each) do
-		@kitaab = Kitaab.new(name:'Urdu')
+		@kitaab = Ustaad::Kitaab.new(name:'Urdu')
 		@qs = ['What is the cpaital of India', 'When did India get independence?', 'What is the freezing point of water?']
 		@as = ['Delhi', 1947, '100 F']
   end
@@ -12,12 +12,12 @@ describe Kitaab do
 	
 	def add_mushqs
 	  @qs.each_index	{ |idx|
-			@kitaab.add_mushq Mushq.new(question:@qs[idx], answer:@as[idx])
+			@kitaab.add_mushq Ustaad::Mushq.new(question:@qs[idx], answer:@as[idx])
 		}
 	end
 	
 	it "should be able to take a new Mushq" do
-		mushq = Mushq.new(:question => @qs.first, :answer => @as.first)
+		mushq = Ustaad::Mushq.new(:question => @qs.first, :answer => @as.first)
 		@kitaab.add_mushq(mushq)
 		@kitaab.all_mushqs.include?(mushq).should == true
 	end

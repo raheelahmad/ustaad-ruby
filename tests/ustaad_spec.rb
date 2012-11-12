@@ -1,9 +1,9 @@
-require_relative '../ustaad'
-require_relative '../mushq'
+require_relative '../lib/ustaad/ustaad'
+require_relative '../lib/ustaad/mushq'
 
 describe Ustaad do
 	before(:each) do
-    @ustaad = Ustaad.new
+    @ustaad = Ustaad::Ustaad.new
 	end
 	
 	it "should be creatable" do
@@ -12,11 +12,6 @@ describe Ustaad do
 	
 	
 	# using kitaab
-	
-	it "should be able to add a new kitaab" do
-	  @ustaad.add_kitaab(name:'Urdu')
-	end
-	
 	
 	# persistence
 	
