@@ -42,5 +42,9 @@ module Ustaad
 		def ask
 			@current_notebook.any_question
 		end
+		
+		def ask_any
+			@notebooks[rand(@notebooks.count)].any_question
+		end
   end
 end
