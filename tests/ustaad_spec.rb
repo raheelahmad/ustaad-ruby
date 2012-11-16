@@ -4,6 +4,15 @@ require_relative '../lib/ustaad/mushq'
 describe Ustaad do
 	before(:each) do
     @ustaad = Ustaad::Ustaad.new
+		
+		@notebook_info = []
+		q1s = ['What is the cpaital of India', 'When did India get independence?', 'What is the freezing point of water?']
+		a1s = ['Delhi', 1947, '100 F']
+		@notebook_info << {name:'GK', questions:q1s, answers:a1s}
+		
+		q2s = ['musafir', 'faqat', 'ghaafil']
+		a2s = ['traveler', 'only', 'unbenkownst']
+		@notebook_info << {name:'Urdu', questions:q2s, answers:a2s}
 	end
 	
 	it "should be creatable" do
@@ -14,7 +23,46 @@ describe Ustaad do
 	
 	it "should be able to hold on to an added notebook" do
 	  @ustaad.add_notebook_with_name "Urdu"
-		@ustaad.get_notebook_names.include?("Urdu").should == true
+		@ustaad.notebook_names.include?("Urdu").should == true
+	end
+	
+	it "should be able to list all added notebooks" do
+	  notebook_names = ['Urdu', 'English', 'Swahili']
+		notebook_names.each do |name|
+			@ustaad.add_notebook_with_name name
+		end
+		
+		ustad_notebook_names = @ustaad.notebook_names
+		notebook_names.each do |name|
+			ustad_notebook_names.include?(name).should == true
+		end
+	end
+	
+	it "should be able to set current notebook" do
+		notebook_names = ['Urdu', 'English', 'Swahili']
+		notebook_names.each do |name|
+			@ustaad.add_notebook_with_name name
+		end
+		
+		@ustaad.use_notebook_with_name 'Urdu'
+		@ustaad.current_notebook.name == 'Urdu'
+	end
+	
+	it "should be able to ask a question from current notebook" do
+	  @notebook_info.each do |an_info|
+	  	kitaab = Ustaad::Kitaab.new({name:an_info[:name]})
+			questions = an_info[:questions]
+			questions.each_index do |idx|
+				ques = an_info[:questions][idx]
+				ans = an_info[:answers][idx]
+				m = Ustaad::Mushq.new ({:question => ques, :answer => ans})
+				kitaab.add_mushq(m)
+			end
+			@ustaad.add_notebook kitaab
+	  end
+		
+		@ustaad.use_notebook_with_name @notebook_info[0][:name]
+		@notebook_info[0][:questions].include?( @ustaad.ask ).should == true
 	end
 	
 	# persistence

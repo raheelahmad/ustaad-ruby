@@ -12,12 +12,12 @@ describe Ustaad::Kitaab do
 	
 	def add_mushqs
 	  @qs.each_index	{ |idx|
-			@kitaab.add_mushq Ustaad::Mushq.new(question:@qs[idx], answer:@as[idx])
+			@kitaab.add_mushq Ustaad::Mushq.new({question:@qs[idx], answer:@as[idx]})
 		}
 	end
 	
 	it "should be able to take a new Mushq" do
-		mushq = Ustaad::Mushq.new(:question => @qs.first, :answer => @as.first)
+		mushq = Ustaad::Mushq.new({:question => @qs.first, :answer => @as.first})
 		@kitaab.add_mushq(mushq)
 		@kitaab.all_mushqs.include?(mushq).should == true
 	end
