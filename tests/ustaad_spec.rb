@@ -31,6 +31,7 @@ describe Ustaad do
 	  end
 		
 		@all_questions = [].concat(q1s).concat(q2s)
+		@all_answers = [].concat(a1s).concat(a2s)
 	end
 	
 	# ----
@@ -72,7 +73,9 @@ describe Ustaad do
 	  add_default_notebooks
 		
 		@ustaad.use_notebook_with_name @notebook_info[0][:name]
-		@notebook_info[0][:questions].include?( @ustaad.ask ).should == true
+		q = @ustaad.ask
+		@notebook_info[0][:questions].include?(q).should == true
+		@notebook_info[0][:answers].include?(@ustaad.answer_for(q)).should == true
 	end
 	
 	it "should be able to ask a question from any notebook" do

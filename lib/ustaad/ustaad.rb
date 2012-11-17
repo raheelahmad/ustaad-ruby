@@ -2,10 +2,13 @@
 
 module Ustaad
   class Ustaad
-		attr_reader :current_notebook
+		MemoryStore = :memory_store
+		FileStore = :file_store
+		attr_reader :current_notebook, :store_type
 		def initialize
 			@nouns ||= ['notebooks', 'mushq']
 			@verbs ||= ['list', 'use']
+			@store_type = FileStore
 		end
 		
 		def act args
@@ -44,7 +47,12 @@ module Ustaad
 		end
 		
 		def ask_any
-			@notebooks[rand(@notebooks.count)].any_question
+			@current_notebook = @notebooks[rand(@notebooks.count)]
+			ask
+		end
+		
+		def answer_for (question)
+			@current_notebook.answer_for(question)
 		end
   end
 end

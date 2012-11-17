@@ -12,7 +12,7 @@ describe Ustaad::Kitaab do
 	
 	def add_mushqs
 	  @qs.each_index	{ |idx|
-			@kitaab.add_mushq Ustaad::Mushq.new({question:@qs[idx], answer:@as[idx]})
+			@kitaab.add_mushq (Ustaad::Mushq.new({question:@qs[idx], answer:@as[idx]}))
 		}
 	end
 	
