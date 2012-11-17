@@ -87,7 +87,9 @@ describe Ustaad do
 	# persistence
 	
 	it "should persist mushqs between new Ustaad's" do
-	  pending "Figure out persistence options (redis, couch-db)"
+	  add_default_notebooks
+		new_ustaad = Ustaad::Ustaad.new
+		puts "All: #{new_ustaad.notebook_names}".include?('GK').should? == true
 	end
 	
 end

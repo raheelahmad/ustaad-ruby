@@ -8,6 +8,7 @@ module Ustaad
 		def initialize
 			@nouns ||= ['notebooks', 'mushq']
 			@verbs ||= ['list', 'use']
+			@notebooks = []
 			@store_type = FileStore
 		end
 		
@@ -25,7 +26,6 @@ module Ustaad
 		end
 		
   	def add_notebook_with_name(new_kitaab_name)
-  		@notebooks ||= []
 			@notebooks << Kitaab.new(name:new_kitaab_name)
   	end
 		
