@@ -19,6 +19,11 @@ module Ustaad
 			return @mushqs
 		end
 	
+		def all_questions
+			qs = []
+			@mushqs.each {|m| qs << m.question}
+			qs
+		end
 		def any_question
 			random_index = rand(@mushqs.count)
 			return @mushqs.at(random_index).question

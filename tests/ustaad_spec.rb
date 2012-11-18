@@ -112,4 +112,16 @@ describe Ustaad do
 		end
 	end
 	
+	it "should persist added mushqs between new Ustaad's" do
+		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
+		a_notebook = ustaad_one.notebooks.first
+		a_notebook.should_not == nil
+		question = 'Where is the Eiffel Tower located?'; answer = 'Paris'
+		a_notebook.add_mushq_with_info ({question:question, answer:answer})
+
+		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
+		questions_in_two = []
+		# ustaad_two.notebooks.each do |n_two|
+		# 	n_two.mushqs.each { |m_two| questions_in_two << 
+	end
 end

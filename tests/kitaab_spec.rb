@@ -26,6 +26,12 @@ describe Ustaad::Kitaab do
 	  add_mushqs
 		@qs.include?(@kitaab.any_question).should == true
 	end
+
+	it "should give all added mushqs' questions" do
+		add_mushqs
+		k_qs = @kitaab.all_questions
+		@qs.each { |q| k_qs.include?(q).should == true }
+	end
 	
 	it "should confirm the correct answer to a question" do
 		add_mushqs

@@ -21,7 +21,6 @@ module Ustaad
 				file_name = txt.split('.').first
 				load_kitaab_from_file txt
 			}
-			puts notebook_names
 		end
 
 		def load_kitaab_from_file file_name
