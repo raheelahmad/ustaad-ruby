@@ -8,7 +8,7 @@ describe Ustaad do
 	
 	# Helpers
 	
-	def add_default_notebooks
+	def add_default_notebooks_to_ustaad an_ustaad
 		@notebook_info = []
 		q1s = ['What is the cpaital of India', 'When did India get independence?', 'What is the freezing point of water?']
 		a1s = ['Delhi', 1947, '100 F']
@@ -27,7 +27,7 @@ describe Ustaad do
 				m = Ustaad::Mushq.new ({:question => ques, :answer => ans})
 				kitaab.add_mushq(m)
 			end
-			@ustaad.add_notebook kitaab
+			an_ustaad.add_notebook kitaab
 	  end
 		
 		@all_questions = [].concat(q1s).concat(q2s)
@@ -70,7 +70,7 @@ describe Ustaad do
 	end
 	
 	it "should be able to ask a question from current notebook" do
-	  add_default_notebooks
+	  add_default_notebooks_to_ustaad (@ustaad)
 		
 		@ustaad.use_notebook_with_name @notebook_info[0][:name]
 		q = @ustaad.ask
@@ -79,17 +79,37 @@ describe Ustaad do
 	end
 	
 	it "should be able to ask a question from any notebook" do
-	  add_default_notebooks
+	  add_default_notebooks_to_ustaad (@ustaad)
 		
 		@all_questions.include?(@ustaad.ask_any).should == true
 	end
 	
 	# persistence
 	
-	it "should persist mushqs between new Ustaad's" do
-	  add_default_notebooks
-		new_ustaad = Ustaad::Ustaad.new
-		puts "All: #{new_ustaad.notebook_names}".include?('GK').should? == true
+	it "should persist notebook names between new Ustaad's" do
+		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
+		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
+		ustaad_one.notebook_names.each do |a_notebook_name|
+			ustaad_two.notebook_names.include?(a_notebook_name).should == true
+		end
+	end
+
+	it "should persist notebook mushqs between new Ustaad's" do
+		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
+		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
+		ustaad_one.notebooks.each do |a_notebook|
+			b_notebook = ustaad_two.notebooks.select { |b_n| b_n.name == a_notebook.name }.first
+			b_notebook.should_not == nil
+			a_notebook.mushqs.each do |a_mushq|
+				found_matching_mushq = false
+				b_notebook.mushqs.each do |b_mushq|
+					if b_mushq.question == a_mushq.question && b_mushq.answer == a_mushq.answer
+						found_matching_mushq = true 
+					end
+				end
+				found_matching_mushq.should == true
+			end
+		end
 	end
 	
 end

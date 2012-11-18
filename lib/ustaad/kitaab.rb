@@ -10,8 +10,12 @@ module Ustaad
 		def add_mushq (mushq)
 			@mushqs << mushq
 		end
+
+		def add_mushq_with_info (mushq_info)
+			add_mushq Mushq.new(mushq_info)
+		end
 	
-		def all_mushqs
+		def mushqs
 			return @mushqs
 		end
 	

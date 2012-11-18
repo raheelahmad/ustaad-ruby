@@ -19,7 +19,7 @@ describe Ustaad::Kitaab do
 	it "should be able to take a new Mushq" do
 		mushq = Ustaad::Mushq.new({:question => @qs.first, :answer => @as.first})
 		@kitaab.add_mushq(mushq)
-		@kitaab.all_mushqs.include?(mushq).should == true
+		@kitaab.mushqs.include?(mushq).should == true
 	end
 	
 	it "should give a question from an added mushq" do
