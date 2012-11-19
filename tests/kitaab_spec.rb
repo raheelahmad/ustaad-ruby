@@ -39,4 +39,8 @@ describe Ustaad::Kitaab do
 		our_a = @as[@qs.index(q)]
 		@kitaab.answer_for(q).should == our_a
 	end
+
+	it "should add the new answer if adding a duplicate mushq" do
+		pending 'Implement the duplicatemushq add'
+	end
 end

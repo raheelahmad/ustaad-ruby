@@ -121,7 +121,10 @@ describe Ustaad do
 
 		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
 		questions_in_two = []
-		# ustaad_two.notebooks.each do |n_two|
-		# 	n_two.mushqs.each { |m_two| questions_in_two << 
+		ustaad_two.notebooks.each do |n_two|
+			questions_in_two.concat (n_two.all_questions)
+		end
+		puts "Will check if #{question} exists in #{questions_in_two}"
+		questions_in_two.include?(question).should == true
 	end
 end

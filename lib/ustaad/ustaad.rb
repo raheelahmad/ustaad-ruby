@@ -11,25 +11,19 @@ module Ustaad
 			@notebooks = []
 			@store_type = FileStore
 			@@kitaabs_dir ||= Dir.pwd + '/kitaabs'
-			@@pair_separator = '||'
 			# load_kitaabs
 		end
 
 		def load_kitaabs
 			Dir.chdir(@@kitaabs_dir)
 			Dir.glob('*.txt') { |txt|
-				file_name = txt.split('.').first
 				load_kitaab_from_file txt
 			}
 		end
 
-		def load_kitaab_from_file file_name
-			kitaab = Kitaab.new(name:file_name)
-			File.open(file_name).each do |line|
-				pair = line.split(@@pair_separator)
-				next if pair.count < 2
-				kitaab.add_mushq_with_info ({:question => pair[0], :answer => pair[1]})
-			end
+		def load_kitaab_from_file file
+			file_path = @@kitaabs_dir + "/" + file
+			kitaab = Kitaab.new({file_path:file_path})
 			add_notebook kitaab
 		end
 		
