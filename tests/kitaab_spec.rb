@@ -19,12 +19,18 @@ describe Ustaad::Kitaab do
 	it "should be able to take a new Mushq" do
 		mushq = Ustaad::Mushq.new({:question => @qs.first, :answer => @as.first})
 		@kitaab.add_mushq(mushq)
-		@kitaab.all_mushqs.include?(mushq).should == true
+		@kitaab.mushqs.include?(mushq).should == true
 	end
 	
 	it "should give a question from an added mushq" do
 	  add_mushqs
 		@qs.include?(@kitaab.any_question).should == true
+	end
+
+	it "should give all added mushqs' questions" do
+		add_mushqs
+		k_qs = @kitaab.all_questions
+		@qs.each { |q| k_qs.include?(q).should == true }
 	end
 	
 	it "should confirm the correct answer to a question" do
@@ -32,5 +38,9 @@ describe Ustaad::Kitaab do
 	  q = @kitaab.any_question
 		our_a = @as[@qs.index(q)]
 		@kitaab.answer_for(q).should == our_a
+	end
+
+	it "should add the new answer if adding a duplicate mushq" do
+		pending 'Implement the duplicatemushq add'
 	end
 end

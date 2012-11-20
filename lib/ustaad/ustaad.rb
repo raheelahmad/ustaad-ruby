@@ -4,11 +4,27 @@ module Ustaad
   class Ustaad
 		MemoryStore = :memory_store
 		FileStore = :file_store
-		attr_reader :current_notebook, :store_type
+		attr_reader :current_notebook, :notebooks, :store_type
 		def initialize
 			@nouns ||= ['notebooks', 'mushq']
 			@verbs ||= ['list', 'use']
+			@notebooks = []
 			@store_type = FileStore
+			@@kitaabs_dir ||= Dir.pwd + '/kitaabs'
+			# load_kitaabs
+		end
+
+		def load_kitaabs
+			Dir.chdir(@@kitaabs_dir)
+			Dir.glob('*.txt') { |txt|
+				load_kitaab_from_file txt
+			}
+		end
+
+		def load_kitaab_from_file file
+			file_path = @@kitaabs_dir + "/" + file
+			kitaab = Kitaab.new({file_path:file_path})
+			add_notebook kitaab
 		end
 		
 		def act args
@@ -25,7 +41,6 @@ module Ustaad
 		end
 		
   	def add_notebook_with_name(new_kitaab_name)
-  		@notebooks ||= []
 			@notebooks << Kitaab.new(name:new_kitaab_name)
   	end
 		
