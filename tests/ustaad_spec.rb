@@ -116,7 +116,7 @@ describe Ustaad do
 		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
 		a_notebook = ustaad_one.notebooks.first
 		a_notebook.should_not == nil
-		question = 'Where is the Eiffel Tower located?'; answer = 'Paris'
+		question = 'Where is Qutub Minar?'; answer = 'New Delhi'
 		a_notebook.add_mushq_with_info ({question:question, answer:answer})
 
 		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
@@ -124,7 +124,6 @@ describe Ustaad do
 		ustaad_two.notebooks.each do |n_two|
 			questions_in_two.concat (n_two.all_questions)
 		end
-		puts "Will check if #{question} exists in #{questions_in_two}"
 		questions_in_two.include?(question).should == true
 	end
 end
