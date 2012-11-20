@@ -33,6 +33,15 @@ describe Ustaad::Kitaab do
 		@qs.each { |q| k_qs.include?(q).should == true }
 	end
 	
+	it "should add the new answer to a question previously added" do
+		add_mushqs
+		old_question = @qs[1]
+		new_answer = 1922
+		old_mushq_with_new_answer = Ustaad::Mushq.new({question:old_question, answer:new_answer})
+		@kitaab.add_mushq (old_mushq_with_new_answer)
+		@kitaab.answer_for(old_question).should == new_answer
+	end
+
 	it "should confirm the correct answer to a question" do
 		add_mushqs
 	  q = @kitaab.any_question
@@ -40,7 +49,4 @@ describe Ustaad::Kitaab do
 		@kitaab.answer_for(q).should == our_a
 	end
 
-	it "should add the new answer if adding a duplicate mushq" do
-		pending 'Implement the duplicatemushq add'
-	end
 end

@@ -26,8 +26,14 @@ module Ustaad
 		end
 
 		def add_mushq (mushq)
-			@mushqs << mushq
-			save_mushq_to_file (mushq) if @file_path != nil && !@loading
+			previous_mushqs = @mushqs.select {|m| m.question == mushq.question}
+			if previous_mushqs.count > 0
+				previous_mushq = previous_mushqs.first
+				previous_mushq.answer = mushq.answer
+			else
+				@mushqs << mushq
+				save_mushq_to_file (mushq) if @file_path != nil && !@loading
+			end
 		end
 
 		def save_mushq_to_file (mushq)
