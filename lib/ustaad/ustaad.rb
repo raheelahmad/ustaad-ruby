@@ -4,11 +4,11 @@ module Ustaad
   class Ustaad
 		MemoryStore = :memory_store
 		FileStore = :file_store
-		attr_reader :current_notebook, :notebooks, :store_type
+		attr_reader :current_kitaab, :kitaabs, :store_type
 		def initialize
-			@nouns ||= ['notebooks', 'mushq']
+			@nouns ||= ['kitaabs', 'mushq']
 			@verbs ||= ['list', 'use']
-			@notebooks = []
+			@kitaabs = []
 			@store_type = FileStore
 			@@kitaabs_dir ||= Dir.pwd + '/kitaabs'
 			# load_kitaabs
@@ -24,7 +24,7 @@ module Ustaad
 		def load_kitaab_from_file file
 			file_path = @@kitaabs_dir + "/" + file
 			kitaab = Kitaab.new({file_path:file_path})
-			add_notebook kitaab
+			add_kitaab kitaab
 		end
 		
 		def act args
@@ -40,34 +40,34 @@ module Ustaad
 			puts "Will do #{@verb} on #{@noun}"
 		end
 		
-  	def add_notebook_with_name(new_kitaab_name)
-			@notebooks << Kitaab.new(name:new_kitaab_name)
+  	def add_kitaab_with_name(new_kitaab_name)
+			@kitaabs << Kitaab.new(name:new_kitaab_name)
   	end
 		
-		def add_notebook (new_kitaab)
-			@notebooks ||= []
-			@notebooks << new_kitaab
+		def add_kitaab (new_kitaab)
+			@kitaabs ||= []
+			@kitaabs << new_kitaab
 		end
 		
-		def notebook_names
-			@notebooks.map { |e| e.name }
+		def kitaab_names
+			@kitaabs.map { |e| e.name }
 		end
 		
-		def use_notebook_with_name(kitaab_name)
-			@current_notebook = @notebooks.select { |notebook| notebook.name == kitaab_name }.first
+		def use_kitaab_with_name(kitaab_name)
+			@current_kitaab = @kitaabs.select { |kitaab| kitaab.name == kitaab_name }.first
 		end
 		
 		def ask
-			@current_notebook.any_question
+			@current_kitaab.any_question
 		end
 		
 		def ask_any
-			@current_notebook = @notebooks[rand(@notebooks.count)]
+			@current_kitaab = @kitaabs[rand(@kitaabs.count)]
 			ask
 		end
 		
 		def answer_for (question)
-			@current_notebook.answer_for(question)
+			@current_kitaab.answer_for(question)
 		end
   end
 end
