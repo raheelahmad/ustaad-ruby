@@ -24,7 +24,6 @@ module Ustaad
 		end
 
 		def load_kitaabs
-			puts @@kitaabs_dir
 			Dir.chdir(@@kitaabs_dir)
 			Dir.glob('*.txt') { |txt|
 				load_kitaab_from_file txt
@@ -41,16 +40,22 @@ module Ustaad
 			if !@verbs.include?(args[:verb])
 				puts "Cannot do '#{args[:verb]}'"
 				exit
-			elsif !@nouns.include?(args[:noun])
-				puts "Don't know #{args[:noun]}"
-				exit
 			end
 		  @verb = args[:verb]
 		  @noun = args[:noun]
-			puts "Will do #{@verb} on #{@noun}"
 
-			#if @verb == list
-				#if @n
+			if @verb == 'list' and @noun == 'kitaabs'
+				kitaab_names.each { |k_name| puts "kitaab: #{k_name}" }
+			elsif @verb == 'use'
+				if @noun == nil
+					puts "Please enter a kitaab name to use"
+					exit
+				elsif ! kitaab_names.include?(@noun)
+					puts "I don't know kitaab: #{@noun}"
+					exit
+				end
+				use_kitaab_with_name @noun
+			end
 		end
 		
   	def add_kitaab_with_name(new_kitaab_name)

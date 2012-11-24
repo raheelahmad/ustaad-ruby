@@ -1,13 +1,10 @@
 #! /Users/raheel/.rvm/bin/rvm-auto-ruby
 
 require_relative "../lib/ustaad/ustaad"
-
-if (ARGV.count < 2)
-	puts 'Usage: need a verb and a noun'
-	exit
-end
+require_relative "../lib/ustaad/kitaab"
+require_relative "../lib/ustaad/mushq"
 
 ustaad = Ustaad::Ustaad.new
-noun = ARGV[0]
-verb = ARGV[1]
+noun = ARGV[1]
+verb = ARGV[0]
 ustaad.act(verb:verb, noun:noun)
