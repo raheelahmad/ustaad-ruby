@@ -15,7 +15,7 @@ module Ustaad
 			end
 
 			@nouns ||= ['kitaabs', 'mushq']
-			@verbs ||= ['list', 'use']
+			@verbs ||= ['list', 'use', 'ask']
 			@store_type ||= FileStore
 			@@kitaabs_dir ||= Dir.pwd + '/kitaabs'
 
@@ -28,6 +28,7 @@ module Ustaad
 			Dir.glob('*.txt') { |txt|
 				load_kitaab_from_file txt
 			}
+			if @kitaabs.length > 0 then @current_kitaab = @kitaabs.first end
 		end
 
 		def load_kitaab_from_file file
@@ -37,25 +38,41 @@ module Ustaad
 		end
 		
 		def act args
+			output = ''
 			if !@verbs.include?(args[:verb])
-				puts "Cannot do '#{args[:verb]}'"
-				exit
+				output = "Cannot do '#{args[:verb]}'"
 			end
 		  @verb = args[:verb]
 		  @noun = args[:noun]
 
-			if @verb == 'list' and @noun == 'kitaabs'
-				kitaab_names.each { |k_name| puts "kitaab: #{k_name}" }
+			if @verb == 'list'
+				if @noun == 'kitaabs'
+					kitaab_names.each { |k_name| puts "kitaab: #{k_name}" }
+				else
+					output = 'What should I list?'
+				end
 			elsif @verb == 'use'
 				if @noun == nil
-					puts "Please enter a kitaab name to use"
-					exit
+					output = "Please enter a kitaab name to use"
 				elsif ! kitaab_names.include?(@noun)
-					puts "I don't know kitaab: #{@noun}"
-					exit
+					output = "I don't know kitaab: #{@noun}"
 				end
 				use_kitaab_with_name @noun
+				output = "Now using #{@noun}"
+			elsif @verb == 'ask'
+				question = ask
+				puts question
+				answer = STDIN.gets
+				if answer_for(question).strip == answer.strip 
+					output = 'YES'
+				else
+					output = 'NOPE'
+				end
+			else
+				output = 'Cannot do anything'
 			end
+
+			output
 		end
 		
   	def add_kitaab_with_name(new_kitaab_name)
