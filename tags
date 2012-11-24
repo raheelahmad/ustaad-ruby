@@ -1,0 +1,39 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Kitaab	lib/ustaad/kitaab.rb	/^	class Kitaab$/;"	c	class:Ustaad
+Mushq	lib/ustaad/mushq.rb	/^	class Mushq$/;"	c	class:Ustaad
+Options	lib/ustaad/options.rb	/^	class Options$/;"	c	class:Ustaad
+Ustaad	lib/ustaad/kitaab.rb	/^module Ustaad$/;"	m
+Ustaad	lib/ustaad/mushq.rb	/^module Ustaad$/;"	m
+Ustaad	lib/ustaad/options.rb	/^module Ustaad$/;"	m
+Ustaad	lib/ustaad/ustaad.rb	/^  class Ustaad$/;"	c	class:Ustaad
+Ustaad	lib/ustaad/ustaad.rb	/^module Ustaad$/;"	m
+Ustaad	lib/ustaad/version.rb	/^module Ustaad$/;"	m
+act	lib/ustaad/ustaad.rb	/^		def act args$/;"	f	class:Ustaad.Ustaad
+add_default_kitaabs_to_ustaad	tests/ustaad_spec.rb	/^	def add_default_kitaabs_to_ustaad an_ustaad$/;"	f
+add_kitaab	lib/ustaad/ustaad.rb	/^		def add_kitaab (new_kitaab)$/;"	f	class:Ustaad.Ustaad
+add_kitaab_with_name	lib/ustaad/ustaad.rb	/^  	def add_kitaab_with_name(new_kitaab_name)$/;"	f	class:Ustaad.Ustaad
+add_mushq	lib/ustaad/kitaab.rb	/^		def add_mushq (mushq)$/;"	f	class:Ustaad.Kitaab
+add_mushq_with_info	lib/ustaad/kitaab.rb	/^		def add_mushq_with_info (mushq_info)$/;"	f	class:Ustaad.Kitaab
+add_mushqs	tests/kitaab_spec.rb	/^	def add_mushqs$/;"	f
+all_questions	lib/ustaad/kitaab.rb	/^		def all_questions$/;"	f	class:Ustaad.Kitaab
+answer_for	lib/ustaad/kitaab.rb	/^		def answer_for (question)$/;"	f	class:Ustaad.Kitaab
+answer_for	lib/ustaad/ustaad.rb	/^		def answer_for (question)$/;"	f	class:Ustaad.Ustaad
+any_question	lib/ustaad/kitaab.rb	/^		def any_question$/;"	f	class:Ustaad.Kitaab
+ask	lib/ustaad/ustaad.rb	/^		def ask$/;"	f	class:Ustaad.Ustaad
+ask_any	lib/ustaad/ustaad.rb	/^		def ask_any$/;"	f	class:Ustaad.Ustaad
+initialize	lib/ustaad/kitaab.rb	/^		def initialize (info)$/;"	f	class:Ustaad.Kitaab
+initialize	lib/ustaad/mushq.rb	/^		def initialize(q_and_a)$/;"	f	class:Ustaad.Mushq
+initialize	lib/ustaad/options.rb	/^		def initialize(argv)$/;"	f	class:Ustaad.Options
+initialize	lib/ustaad/ustaad.rb	/^		def initialize$/;"	f	class:Ustaad.Ustaad
+kitaab_names	lib/ustaad/ustaad.rb	/^		def kitaab_names$/;"	f	class:Ustaad.Ustaad
+load_kitaab_from_file	lib/ustaad/ustaad.rb	/^		def load_kitaab_from_file file$/;"	f	class:Ustaad.Ustaad
+load_kitaabs	lib/ustaad/ustaad.rb	/^		def load_kitaabs$/;"	f	class:Ustaad.Ustaad
+load_mushqs_from_file	lib/ustaad/kitaab.rb	/^		def load_mushqs_from_file$/;"	f	class:Ustaad.Kitaab
+mushqs	lib/ustaad/kitaab.rb	/^		def mushqs$/;"	f	class:Ustaad.Kitaab
+save_mushq_to_file	lib/ustaad/kitaab.rb	/^		def save_mushq_to_file (mushq)$/;"	f	class:Ustaad.Kitaab
+use_kitaab_with_name	lib/ustaad/ustaad.rb	/^		def use_kitaab_with_name(kitaab_name)$/;"	f	class:Ustaad.Ustaad

@@ -2,8 +2,9 @@ require_relative '../lib/ustaad/ustaad'
 require_relative '../lib/ustaad/mushq'
 
 describe Ustaad do
+
 	before(:each) do
-    @ustaad = Ustaad::Ustaad.new
+    @ustaad = Ustaad::Ustaad.new ({store_type:Ustaad::Ustaad::MemoryStore})
 	end
 	
 	# Helpers
@@ -87,16 +88,16 @@ describe Ustaad do
 	# persistence
 	
 	it "should persist kitaab names between new Ustaad's" do
-		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
-		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
+		ustaad_one = Ustaad::Ustaad.new
+		ustaad_two = Ustaad::Ustaad.new
 		ustaad_one.kitaab_names.each do |a_kitaab_name|
 			ustaad_two.kitaab_names.include?(a_kitaab_name).should == true
 		end
 	end
 
 	it "should persist kitaab mushqs between new Ustaad's" do
-		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
-		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
+		ustaad_one = Ustaad::Ustaad.new
+		ustaad_two = Ustaad::Ustaad.new
 		ustaad_one.kitaabs.each do |a_kitaab|
 			b_kitaab = ustaad_two.kitaabs.select { |b_n| b_n.name == a_kitaab.name }.first
 			b_kitaab.should_not == nil
@@ -113,13 +114,13 @@ describe Ustaad do
 	end
 	
 	it "should persist added mushqs between new Ustaad's" do
-		ustaad_one = Ustaad::Ustaad.new; ustaad_one.load_kitaabs
+		ustaad_one = Ustaad::Ustaad.new
 		a_kitaab = ustaad_one.kitaabs.first
 		a_kitaab.should_not == nil
 		question = 'Where is Qutub Minar?'; answer = 'New Delhi'
 		a_kitaab.add_mushq_with_info ({question:question, answer:answer})
 
-		ustaad_two = Ustaad::Ustaad.new; ustaad_two.load_kitaabs
+		ustaad_two = Ustaad::Ustaad.new
 		questions_in_two = []
 		ustaad_two.kitaabs.each do |n_two|
 			questions_in_two.concat (n_two.all_questions)

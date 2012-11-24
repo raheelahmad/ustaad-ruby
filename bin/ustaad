@@ -8,4 +8,6 @@ if (ARGV.count < 2)
 end
 
 ustaad = Ustaad::Ustaad.new
-ustaad.act(verb:ARGV[0], noun:ARGV[1])
+noun = ARGV[0]
+verb = ARGV[1]
+ustaad.act(verb:verb, noun:noun)

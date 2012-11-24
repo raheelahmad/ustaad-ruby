@@ -5,16 +5,26 @@ module Ustaad
 		MemoryStore = :memory_store
 		FileStore = :file_store
 		attr_reader :current_kitaab, :kitaabs, :store_type
-		def initialize
+
+		def initialize (*multi_args)
+			if multi_args.length == 1 and multi_args.first.kind_of?(Hash)
+				args = multi_args.first
+				@nouns = args[:nouns]
+				@verbs = args[:verbs]
+				@store_type = args[:store_type]
+			end
+
 			@nouns ||= ['kitaabs', 'mushq']
 			@verbs ||= ['list', 'use']
-			@kitaabs = []
-			@store_type = FileStore
+			@store_type ||= FileStore
 			@@kitaabs_dir ||= Dir.pwd + '/kitaabs'
-			# load_kitaabs
+
+			@kitaabs = []
+			load_kitaabs if @store_type == FileStore
 		end
 
 		def load_kitaabs
+			puts @@kitaabs_dir
 			Dir.chdir(@@kitaabs_dir)
 			Dir.glob('*.txt') { |txt|
 				load_kitaab_from_file txt
@@ -29,7 +39,7 @@ module Ustaad
 		
 		def act args
 			if !@verbs.include?(args[:verb])
-				puts "Cannot do #{args[:verb]}"
+				puts "Cannot do '#{args[:verb]}'"
 				exit
 			elsif !@nouns.include?(args[:noun])
 				puts "Don't know #{args[:noun]}"
@@ -38,6 +48,9 @@ module Ustaad
 		  @verb = args[:verb]
 		  @noun = args[:noun]
 			puts "Will do #{@verb} on #{@noun}"
+
+			#if @verb == list
+				#if @n
 		end
 		
   	def add_kitaab_with_name(new_kitaab_name)
