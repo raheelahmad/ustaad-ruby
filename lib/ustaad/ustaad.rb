@@ -63,7 +63,7 @@ module Ustaad
 				question = ask
 				puts question
 				answer = STDIN.gets
-				if answer_for(question).strip == answer.strip 
+				if answer_for(question).strip.downcase == answer.strip.downcase
 					output = 'YES'
 				else
 					output = 'NOPE'
