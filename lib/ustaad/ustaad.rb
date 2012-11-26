@@ -1,4 +1,6 @@
 # require "version.rb"
+# encoding: utf-8
+require_relative '../utils/common'
 
 module Ustaad
   class Ustaad
@@ -47,18 +49,20 @@ module Ustaad
 
 			if @verb == 'list'
 				if @noun == 'kitaabs'
+					puts pluralize(kitaab_names.count, 'kitaab')
 					kitaab_names.each { |k_name| puts "kitaab: #{k_name}" }
 				else
 					output = 'What should I list?'
 				end
 			elsif @verb == 'use'
-				if @noun == nil
+				if !@noun or !@noun.length
 					output = "Please enter a kitaab name to use"
 				elsif ! kitaab_names.include?(@noun)
 					output = "I don't know kitaab: #{@noun}"
+				else
+					use_kitaab_with_name @noun
+					output = "Now using #{@noun}"
 				end
-				use_kitaab_with_name @noun
-				output = "Now using #{@noun}"
 			elsif @verb == 'ask'
 				question = ask
 				puts question

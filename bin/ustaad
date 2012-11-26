@@ -1,5 +1,5 @@
 #! /Users/raheel/.rvm/bin/rvm-auto-ruby
-
+# encoding: utf-8
 require_relative "../lib/ustaad/ustaad"
 require_relative "../lib/ustaad/kitaab"
 require_relative "../lib/ustaad/mushq"
@@ -9,6 +9,7 @@ require_relative "../lib/ustaad/mushq"
 # args = arg_string.split(' ')
 
 ustaad ||= Ustaad::Ustaad.new
+print "→ "
 while args = STDIN.gets
 	args = args.split(' ')
 	if args.length == 0 or args[0] == 'exit'
@@ -18,4 +19,5 @@ while args = STDIN.gets
 	verb = args[0]
 	output = ustaad.act(verb:verb, noun:noun)
 	puts output if output.length > 1
+	print "→ "
 end
